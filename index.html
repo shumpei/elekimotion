@@ -71,7 +71,7 @@
         document.getElementById('rotation-beta').innerHTML = e.rotationRate.beta.toFixed(2)+"°/s";
         document.getElementById('rotation-gamma').innerHTML = e.rotationRate.gamma.toFixed(2)+"°/s";
 
-        const THRESHOLD = -7;
+        const THRESHOLD = -10;
         if (e.acceleration.y < THRESHOLD) {
           if (flipDownStatus === 'flipDownStart') {
             flipDownStatus = 'flipDown';
