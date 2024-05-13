@@ -32,6 +32,7 @@
       function flipDownStart(e) {
       }
       function flipDownEnd(e) {
+        nFlipDown++;
         document.getElementById('console').innerHTML = `${nFlipDown} flipped!`;
         if (flipDownCountTimer !== undefined) {
           clearTimeout(flipDownCountTimer);
