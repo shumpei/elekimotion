@@ -45,14 +45,14 @@
         document.getElementById('rotation-gamma').innerHTML = e.rotationRate.gamma.toFixed(2)+"°/s";
 
         if (e.acceleration.y < -10) {
-          if (!flipStart) {
-            flipStartY = e.acceleration.y
-            flipStartGY = e.accelerationIncludingGravity.y
-          } else {
-            // 大きく下に動かした
-            if (flipStartGY - e.accelerationIncludingGravity.y > 5) {
+          // if (!flipStart) {
+          //   flipStartY = e.acceleration.y
+          //   flipStartGY = e.accelerationIncludingGravity.y
+          // } else {
+          //   // 大きく下に動かした
+          //   if (flipStartGY - e.accelerationIncludingGravity.y  5) {
               document.getElementById('console').innerHTML = "fliped!";
-            }
+            // }
           }
         }
       });
