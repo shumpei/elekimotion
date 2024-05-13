@@ -46,6 +46,7 @@
       let flipDownCountTimer;
       let clearConsoleTimer;
       function flipDownStart(e) {
+        soundElem.play();
       }
       function flipDownEnd(e) {
         nFlipDown++;
@@ -57,8 +58,6 @@
           }
           soundElem.setAttribute('src', sounds[soundIndex]);
         }
-        soundElem.play();
-
         if (flipDownCountTimer !== undefined) {
           clearTimeout(flipDownCountTimer);
         }
