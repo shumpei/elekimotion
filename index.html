@@ -29,6 +29,7 @@
       let nFlipDown = 0;
       let flipDownStatus;
       let flipDownCountTimer;
+      let clearConsoleTimer;
       function flipDownStart(e) {
       }
       function flipDownEnd(e) {
@@ -39,8 +40,13 @@
         }
         flipDownCountTimer = setTimeout(() => {
           nFlipDown = 0;
-          document.getElementById('console').innerHTML = "";
         }, 1000);
+        if (clearConsoleTimer !== undefined) {
+          clearTimeout(clearConsoleTimer);
+        }
+        clearConsoleTimer = setTimeout(() => {
+          document.getElementById('console').innerHTML = '';
+        }, 3000);
       }
 
       /**
