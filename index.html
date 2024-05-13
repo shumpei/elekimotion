@@ -28,6 +28,7 @@
       }
       let flipStartY;
       let flipStartGY;
+      let flipped = false;
       window.addEventListener("devicemotion", function(e){
         let requestBtn = document.querySelector("#get-motion");
         if (requestBtn){requestBtn.remove();}
@@ -45,15 +46,16 @@
         document.getElementById('rotation-gamma').innerHTML = e.rotationRate.gamma.toFixed(2)+"°/s";
 
         if (e.acceleration.y < -10) {
-          // if (!flipStart) {
-          //   flipStartY = e.acceleration.y
-          //   flipStartGY = e.accelerationIncludingGravity.y
-          // } else {
-          //   // 大きく下に動かした
-          //   if (flipStartGY - e.accelerationIncludingGravity.y  5) {
-              document.getElementById('console').innerHTML = "fliped!";
-            // }
-          // }
+          document.getElementById('console').innerHTML = "fliped!";
+          if (flipped) {
+            document.getElementById('console').innerHTML = "double fliped!";
+            flipped = false;
+          } else {
+            flipped = true;
+            setTimeout(() => {
+              flipped = false;
+            }, 1000)
+          }
         }
       });
     </script>
