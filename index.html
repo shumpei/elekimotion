@@ -26,7 +26,8 @@
           return alert("You must grant access to the device's sensor for this demo");
         }
       }
-      
+      let flipStartY;
+      let flipStartGY;
       window.addEventListener("devicemotion", function(e){
         let requestBtn = document.querySelector("#get-motion");
         if (requestBtn){requestBtn.remove();}
@@ -44,7 +45,15 @@
         document.getElementById('rotation-gamma').innerHTML = e.rotationRate.gamma.toFixed(2)+"°/s";
 
         if (e.acceleration.y < -10) {
-          document.getElementById('console').innerHTML = "fliped!";
+          if (!flipStart) {
+            flipStartY = e.acceleration.y
+            flipStartGY = e.accelerationIncludingGravity.y
+          } else {
+            // 大きく下に動かした
+            if (flipStartGY - e.accelerationIncludingGravity.y > 5) {
+              document.getElementById('console').innerHTML = "fliped!";
+            }
+          }
         }
       });
     </script>
