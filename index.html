@@ -80,7 +80,7 @@
             flipDownStart(e);
           }
         } else {
-          if (flipDownStatus === 'flipDown') {
+          if (flipDownStatus !== undefined) {
             flipDownStatus = 'flipDownEnd';
             flipDownEnd(e);
           }
