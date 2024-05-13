@@ -15,6 +15,9 @@
 
     <div id="console">
     </div>
+    <audio id="sound"></audio>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
     <script>
       async function getMotion(){
         if (!window.DeviceMotionEvent || !window.DeviceMotionEvent.requestPermission){
@@ -26,6 +29,15 @@
           return alert("You must grant access to the device's sensor for this demo");
         }
       }
+      const soundElem = document.getElementById('sound');
+      const sounds = [
+        'sounds/ガラスが割れる1.mp3',
+        'sounds/キックの素振り2.mp3',
+        'sounds/ロボットを殴る1.mp3',
+      ];
+      let soundIndex = 0;
+      soundElem.setAttribute('src', sounds[soundIndex]);
+
       let nFlipDown = 0;
       let flipDownStatus;
       let flipDownCountTimer;
@@ -35,6 +47,15 @@
       function flipDownEnd(e) {
         nFlipDown++;
         document.getElementById('console').innerHTML = `${nFlipDown} flipped!`;
+        if (nFlipDown >= 2) {
+          soundIndex++;
+          if (soundIndex >= sounds.length) {
+            soundIndex = 0;
+          }
+          soundElem.setAttribute('src', sounds[soundIndex]);
+        }
+        soundElem.play();
+
         if (flipDownCountTimer !== undefined) {
           clearTimeout(flipDownCountTimer);
         }
