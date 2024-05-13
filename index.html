@@ -13,6 +13,8 @@
     rotation-beta: <span id="rotation-beta"></span><br>
     rotation-gamma: <span id="rotation-gamma"></span><br>
 
+    <div id="console">
+    </div>
     <script>
       async function getMotion(){
         if (!window.DeviceMotionEvent || !window.DeviceMotionEvent.requestPermission){
@@ -40,6 +42,10 @@
         document.getElementById('rotation-alpha').innerHTML = e.rotationRate.alpha.toFixed(2)+"°/s";
         document.getElementById('rotation-beta').innerHTML = e.rotationRate.beta.toFixed(2)+"°/s";
         document.getElementById('rotation-gamma').innerHTML = e.rotationRate.gamma.toFixed(2)+"°/s";
+
+        if (e.acceleration.y < -10) {
+          document.getElementById('console').innerHTML = "fliped!";
+        }
       });
     </script>
   </body>
