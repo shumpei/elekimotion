@@ -26,9 +26,27 @@
           return alert("You must grant access to the device's sensor for this demo");
         }
       }
-      let flipStartY;
-      let flipStartGY;
-      let flipped = false;
+      let nFlipDown = 0;
+      let flipDownStatus;
+      let flipDownCountTimer;
+      function flipDownStart(e) {
+      }
+      function flipDownEnd(e) {
+        document.getElementById('console').innerHTML = `${nFlipDown} flipped!`;
+        if (flipDownCountTimer !== undefined) {
+          clearTimeout(flipDownCountTimer);
+        }
+        flipDownCountTimer = setTimeout(() => {
+          nFlipDown = 0;
+        }, 1000);
+      }
+
+      /**
+       * フリップ動作の状態遷移
+       * 1. flipStart: 加速度がしきい値超えた
+       * 2. flip: しきい値を超え続けている
+       * 3. flipEnd: しきい値を下回った
+       */
       window.addEventListener("devicemotion", function(e){
         let requestBtn = document.querySelector("#get-motion");
         if (requestBtn){requestBtn.remove();}
@@ -45,18 +63,20 @@
         document.getElementById('rotation-beta').innerHTML = e.rotationRate.beta.toFixed(2)+"°/s";
         document.getElementById('rotation-gamma').innerHTML = e.rotationRate.gamma.toFixed(2)+"°/s";
 
-        if (e.acceleration.y < -10) {
-          document.getElementById('console').innerHTML = "fliped!";
-          if (flipped) {
-            document.getElementById('console').innerHTML = "double fliped!";
-            flipped = false;
+        const THRESHOLD = -10;
+        if (e.acceleration.y < THRESHOLD) {
+          if (flipDownStatus === 'flipDownStart') {
+            flipDownStatus = 'flipDown';
           } else {
-            flipped = true;
-            setTimeout(() => {
-              document.getElementById('console').innerHTML = "";
-              flipped = false;
-            }, 1000)
+            flipDownStatus = 'flipDownStart'
+            flipDownStart(e);
           }
+        } else {
+          if (flipDownStatus === 'flipDown') {
+            flipDownStatus = 'flipDownEnd';
+            flipDownEnd(e);
+          }
+          flipDownStatus = undefined;
         }
       });
     </script>
