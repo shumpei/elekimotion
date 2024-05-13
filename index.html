@@ -16,7 +16,7 @@
     <div id="console">
     </div>
     <audio id="sound" controls></audio>
-
+    <button onclick="playSound()"></button>
     <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
     <script>
       async function getMotion(){
@@ -38,6 +38,9 @@
       let soundIndex = 0;
       soundElem.setAttribute('src', sounds[soundIndex]);
 
+      function playSound() {
+        soundElem.play();
+      }
       let nFlipDown = 0;
       let flipDownStatus;
       let flipDownCountTimer;
