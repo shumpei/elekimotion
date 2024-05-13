@@ -15,7 +15,7 @@
 
     <div id="console">
     </div>
-    <audio id="sound" controls></audio>
+    <audio id="sound" preload="auto" controls></audio>
     <button onclick="playSound()"></button>
     <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
     <script>
@@ -94,7 +94,7 @@
         document.getElementById('rotation-beta').innerHTML = e.rotationRate.beta.toFixed(2)+"°/s";
         document.getElementById('rotation-gamma').innerHTML = e.rotationRate.gamma.toFixed(2)+"°/s";
 
-        const THRESHOLD = -10;
+        const THRESHOLD = -3;
         if (e.acceleration.y < THRESHOLD) {
           if (flipDownStatus === 'flipDownStart') {
             flipDownStatus = 'flipDown';
